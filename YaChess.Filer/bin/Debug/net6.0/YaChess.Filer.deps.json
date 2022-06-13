@@ -1,0 +1,47 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "YaChess.Filer/1.0.0": {
+        "dependencies": {
+          "YaChess.ConApp": "1.0.0",
+          "YaChess.Rules": "1.0.0"
+        },
+        "runtime": {
+          "YaChess.Filer.dll": {}
+        }
+      },
+      "YaChess.ConApp/1.0.0": {
+        "runtime": {
+          "YaChess.ConApp.dll": {}
+        }
+      },
+      "YaChess.Rules/1.0.0": {
+        "runtime": {
+          "YaChess.Rules.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "YaChess.Filer/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "YaChess.ConApp/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "YaChess.Rules/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

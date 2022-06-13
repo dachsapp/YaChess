@@ -1,0 +1,12 @@
+/Users/yannialshoufi/Desktop/school/CABS/YaChess/YaChess/YaChess.Rules/bin/Debug/net6.0/YaChess.Rules.deps.json
+/Users/yannialshoufi/Desktop/school/CABS/YaChess/YaChess/YaChess.Rules/bin/Debug/net6.0/YaChess.Rules.dll
+/Users/yannialshoufi/Desktop/school/CABS/YaChess/YaChess/YaChess.Rules/bin/Debug/net6.0/YaChess.Rules.pdb
+/Users/yannialshoufi/Desktop/school/CABS/YaChess/YaChess/YaChess.Rules/obj/Debug/net6.0/YaChess.Rules.csproj.AssemblyReference.cache
+/Users/yannialshoufi/Desktop/school/CABS/YaChess/YaChess/YaChess.Rules/obj/Debug/net6.0/YaChess.Rules.GeneratedMSBuildEditorConfig.editorconfig
+/Users/yannialshoufi/Desktop/school/CABS/YaChess/YaChess/YaChess.Rules/obj/Debug/net6.0/YaChess.Rules.AssemblyInfoInputs.cache
+/Users/yannialshoufi/Desktop/school/CABS/YaChess/YaChess/YaChess.Rules/obj/Debug/net6.0/YaChess.Rules.AssemblyInfo.cs
+/Users/yannialshoufi/Desktop/school/CABS/YaChess/YaChess/YaChess.Rules/obj/Debug/net6.0/YaChess.Rules.csproj.CoreCompileInputs.cache
+/Users/yannialshoufi/Desktop/school/CABS/YaChess/YaChess/YaChess.Rules/obj/Debug/net6.0/YaChess.Rules.dll
+/Users/yannialshoufi/Desktop/school/CABS/YaChess/YaChess/YaChess.Rules/obj/Debug/net6.0/refint/YaChess.Rules.dll
+/Users/yannialshoufi/Desktop/school/CABS/YaChess/YaChess/YaChess.Rules/obj/Debug/net6.0/YaChess.Rules.pdb
+/Users/yannialshoufi/Desktop/school/CABS/YaChess/YaChess/YaChess.Rules/obj/Debug/net6.0/ref/YaChess.Rules.dll

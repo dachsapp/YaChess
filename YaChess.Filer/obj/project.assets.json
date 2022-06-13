@@ -1,0 +1,107 @@
+{
+  "version": 3,
+  "targets": {
+    "net6.0": {
+      "YaChess.ConApp/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/YaChess.ConApp.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/YaChess.ConApp.dll": {}
+        }
+      },
+      "YaChess.Rules/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/YaChess.Rules.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/YaChess.Rules.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "YaChess.ConApp/1.0.0": {
+      "type": "project",
+      "path": "../YaChess.ConApp/YaChess.ConApp.csproj",
+      "msbuildProject": "../YaChess.ConApp/YaChess.ConApp.csproj"
+    },
+    "YaChess.Rules/1.0.0": {
+      "type": "project",
+      "path": "../YaChess.Rules/YaChess.Rules.csproj",
+      "msbuildProject": "../YaChess.Rules/YaChess.Rules.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net6.0": [
+      "YaChess.ConApp >= 1.0.0",
+      "YaChess.Rules >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "/Users/yannialshoufi/.nuget/packages/": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "/Users/yannialshoufi/Desktop/school/CABS/YaChess/YaChess/YaChess.Filer/YaChess.Filer.csproj",
+      "projectName": "YaChess.Filer",
+      "projectPath": "/Users/yannialshoufi/Desktop/school/CABS/YaChess/YaChess/YaChess.Filer/YaChess.Filer.csproj",
+      "packagesPath": "/Users/yannialshoufi/.nuget/packages/",
+      "outputPath": "/Users/yannialshoufi/Desktop/school/CABS/YaChess/YaChess/YaChess.Filer/obj/",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "/Users/yannialshoufi/.nuget/NuGet/NuGet.Config"
+      ],
+      "originalTargetFrameworks": [
+        "net6.0"
+      ],
+      "sources": {
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "projectReferences": {
+            "/Users/yannialshoufi/Desktop/school/CABS/YaChess/YaChess/YaChess.ConApp/YaChess.ConApp.csproj": {
+              "projectPath": "/Users/yannialshoufi/Desktop/school/CABS/YaChess/YaChess/YaChess.ConApp/YaChess.ConApp.csproj"
+            },
+            "/Users/yannialshoufi/Desktop/school/CABS/YaChess/YaChess/YaChess.Rules/YaChess.Rules.csproj": {
+              "projectPath": "/Users/yannialshoufi/Desktop/school/CABS/YaChess/YaChess/YaChess.Rules/YaChess.Rules.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net6.0": {
+        "targetAlias": "net6.0",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.300/RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

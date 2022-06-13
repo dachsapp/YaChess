@@ -1,0 +1,1 @@
+global using YaChess.ConApp.Interfaces;
