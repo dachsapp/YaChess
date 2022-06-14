@@ -1,6 +1,7 @@
 using YaChess.ConApp.Classes.Pieces;
 using YaChess.ConApp.Interfaces;
 using YaChess.Filer;
+using YaChess.Rules;
 
 namespace LoadingTester;
 
@@ -41,7 +42,7 @@ public class FenLoaderTests {
           new Pawn(6, 5),
           new Pawn(6, 6),
           new Pawn(6, 7),
-      
+          
           new Rook(7, 0),
           new Knight(7, 1),
           new Bishop(7, 2),
@@ -49,9 +50,8 @@ public class FenLoaderTests {
           new King(7, 4),
           new Bishop(7, 5),
           new Knight(7, 6),
-          new Rook(7, 7),
+          new Rook(7, 7)
         },
-      
         new IPiece[] {
           new Rook(0, 0),
           new Knight(0, 1),
@@ -61,7 +61,7 @@ public class FenLoaderTests {
           new Bishop(0, 5),
           new Knight(0, 6),
           new Rook(0, 7),
-      
+
           new Pawn(1, 0),
           new Pawn(1, 1),
           new Pawn(1, 2),
@@ -88,8 +88,35 @@ public class FenLoaderTests {
 
     for (var i = 0; i < test2DArrays.Length; i++) {
       IPiece[][] expected = test2DArrays[i];
-      IPiece[][] actual = Loader.GetPieces2DArray(testString[i].Split(" "));
+      IPiece[][] actual = Loader.GetPieces2DArray(testString[i].Split(FenNotation.FenSeparator));
+
       Assert.That(actual, Is.EqualTo(expected));
     }
+  }
+  
+  [Test]
+  public void GetPieces2DArray_IncorrectIn_ArgumentExceptionOut() {
+    // string[] testString = {
+    //   "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 0",
+    // };
+    //
+    // IPiece[][][] test2DArrays = {
+    //   new[] {
+    //     new IPiece[] {
+    //       new Rook(7, 7)
+    //     },
+    //     new IPiece[] {
+    //       new Rook(0, 0),
+    //       new Pawn(1, 7),
+    //     }
+    //   }
+    // };
+    //
+    // for (var i = 0; i < test2DArrays.Length; i++) {
+    //   IPiece[][] expected = test2DArrays[i];
+    //   IPiece[][] actual = Loader.GetPieces2DArray(testString[i].Split(FenNotation.fenSeparator));
+    //
+    //   Assert.That(actual, Is.EqualTo(expected));
+    // }
   }
 }

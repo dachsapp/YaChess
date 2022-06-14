@@ -1,5 +1,5 @@
 namespace YaChess.Rules; 
 
-public class RegularChessGlobals {
+public class RegularChess {
   public const int BoardSide = 8;
 }

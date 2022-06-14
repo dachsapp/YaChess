@@ -1,6 +1,9 @@
 ﻿namespace YaChess.Rules;
 
 public static class FenNotation {
+  public const char FenSeparator = ' ';
+  public const char BoardSeparator = '/';
+  
   public static bool IsNotNullAndCorrectFenNotation(string fenString) {
     bool correctFenNotation = false;
     if (!string.IsNullOrEmpty(fenString))
@@ -9,7 +12,7 @@ public static class FenNotation {
   }
 
   private static bool IsCorrectFenNotation(string fenString) {
-    string[] splitString = fenString.Split(' ');
+    string[] splitString = fenString.Split(FenSeparator);
     return splitString.Length == 6 &&
            IsCorrectBoardNotation(splitString[0]) &&
            IsCorrectTurnNotation(splitString[1]) &&
@@ -40,7 +43,7 @@ public static class FenNotation {
   public static bool IsCorrectBoardNotation(string boardString) {
     bool isCountCorrect = false;
     if (!string.IsNullOrEmpty(boardString)) {
-      string[] splitBoardString = boardString.Split('/');
+      string[] splitBoardString = boardString.Split(BoardSeparator);
       bool correctLength = IsLengthOfBoardSide(splitBoardString.Length);
       bool onlyAllowedChars = AreOnlyAllowedChars(splitBoardString);
 
@@ -68,7 +71,7 @@ public static class FenNotation {
     return splitBoardString.All(part => { return part.All(element => AllowedBoardChars.Contains(element)); });
   }
 
-  private static bool IsLengthOfBoardSide(int length) => length == RegularChessGlobals.BoardSide;
+  private static bool IsLengthOfBoardSide(int length) => length == RegularChess.BoardSide;
 
   public static int CountFenBoardPartElements(string part) {
     var intValues = from element in part
@@ -105,7 +108,7 @@ public static class FenNotation {
                                     (enPassantString == "-" ||
                                      enPassantString.Length == 2 &&
                                      enPassantString[0] >= 'a' &&
-                                     enPassantString[0] <= 'a' + RegularChessGlobals.BoardSide &&
+                                     enPassantString[0] <= 'a' + RegularChess.BoardSide &&
                                      allowedRows.Contains(enPassantString[1]));
 
     return correctEnPassantNotation;

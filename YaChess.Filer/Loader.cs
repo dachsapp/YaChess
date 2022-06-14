@@ -5,7 +5,7 @@ using YaChess.Rules;
 namespace YaChess.Filer;
 
 public static class Loader {
-  // private const string FenFile = "current_profile.fen";
+  private const string FenFile = "current_profile.fen";
 
   // public static IFenProtocol LoadCurrentFenProtocol() {
   //   var manipulator = new FileManipulator(FenFile);
@@ -14,16 +14,12 @@ public static class Loader {
   //   IFenProtocol fenProtocol;
   //
   //   if (FenNotation.IsNotNullAndCorrectFenNotation(fenNotation)) {
-  //     string[] splitFenNotation = fenNotation.Split(' ');
+  //     string[] splitFenNotation = fenNotation.Split(FenNotation.fenSeparator);
   //
   //     var board = new RegularBoard();
   //
   //     IPiece[][] pieces = GetPieces2DArray(splitFenNotation);
-  //     var filledBoard = new RegularFilledBoard(
-  //       board,
-  //       pieces[0],
-  //       pieces[1]
-  //     );
+  //     var filledBoard = new RegularFilledBoard(board, pieces[0], pieces[1]);
   //
   //     CastingAvailability castingAvailability = GetCastingAvailability(splitFenNotation);
   //     string enPassantField = GetEnPassantField(splitFenNotation);
@@ -47,31 +43,35 @@ public static class Loader {
     List<IPiece> whitePieces = new();
     List<IPiece> blackPieces = new();
 
-    if (splitFenNotation != null!) {
+    if (splitFenNotation != null! && StringArrayHasCorrectFenBoardNotation(splitFenNotation)) {
       string boardString = FenNotation.GetBoardStringFromFenNotation(splitFenNotation);
-      string[] splitBoardString = boardString.Split('/');
-      
-      for (int row = 0; row < splitBoardString.Length; row++) {
-        int pieceCol = 0;
-        
-        foreach (char element in splitBoardString[row]) {
-          const int startPos = 1;
-          int intChar = element - '0';
-          int adder = intChar is >= startPos and < startPos + RegularChessGlobals.BoardSide 
-            ? intChar
-            : 1;
+      string[] splitBoardString = boardString.Split(FenNotation.BoardSeparator);
 
-          if (IsWhiteChessPiece(element))
-            whitePieces.Add(GetChessPiece(element, row, pieceCol));
-          if (IsBlackChessPiece(element))
-            blackPieces.Add(GetChessPiece(element, row, pieceCol));
-
-          pieceCol += adder;
-        }
-      }
+      for (int row = 0; row < splitBoardString.Length; row++)
+        SetPiecesRow(whitePieces, blackPieces, row, splitBoardString);
     }
 
     return new[] { whitePieces.ToArray(), blackPieces.ToArray() };
+  }
+
+  private static bool StringArrayHasCorrectFenBoardNotation(string[] stringArray)
+    => stringArray.Length > 0 && FenNotation.IsCorrectBoardNotation(stringArray[0]);
+
+  private static void SetPiecesRow(List<IPiece> whitePieces, List<IPiece> blackPieces, int row, string[] splitBoard) {
+    int pieceCol = 0;
+
+    foreach (char element in splitBoard[row]) {
+      const int startPos = 1;
+      int intChar = element - '0';
+      int adder = intChar is >= startPos and <= RegularChess.BoardSide ? intChar : 1;
+
+      if (IsWhiteChessPiece(element))
+        whitePieces.Add(GetChessPiece(element, row, pieceCol));
+      if (IsBlackChessPiece(element))
+        blackPieces.Add(GetChessPiece(element, row, pieceCol));
+
+      pieceCol += adder;
+    }
   }
 
   private static IPiece GetChessPiece(char chr, int row, int col) {
@@ -86,12 +86,12 @@ public static class Loader {
   }
 
   private static bool IsWhiteChessPiece(char chr) {
-    const string whitePiecesChars = "RKBQKP";
+    const string whitePiecesChars = "RNBQKP";
     return whitePiecesChars.Contains(chr);
   }
 
   private static bool IsBlackChessPiece(char chr) {
-    const string whitePiecesChars = "rkbqkp";
+    const string whitePiecesChars = "rnbqkp";
     return whitePiecesChars.Contains(chr);
   }
 }
