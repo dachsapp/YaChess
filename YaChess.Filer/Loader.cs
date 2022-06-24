@@ -1,3 +1,4 @@
+using YaChess.ConApp.Classes;
 using YaChess.ConApp.Classes.Pieces;
 using YaChess.ConApp.Interfaces;
 using YaChess.Rules;
@@ -14,7 +15,7 @@ public static class Loader {
   //   IFenProtocol fenProtocol;
   //
   //   if (FenNotation.IsNotNullAndCorrectFenNotation(fenNotation)) {
-  //     string[] splitFenNotation = fenNotation.Split(FenNotation.fenSeparator);
+  //     string[] splitFenNotation = fenNotation.Split(FenNotation.FenSeparator);
   //
   //     var board = new RegularBoard();
   //
@@ -25,7 +26,7 @@ public static class Loader {
   //     string enPassantField = GetEnPassantField(splitFenNotation);
   //     int halfmoveClock = GetHalfmoveClock(splitFenNotation);
   //     int fullmoveNumber = GetFullmoveNumber(splitFenNotation);
-  //
+  //     
   //     fenProtocol = new RegularFenProtocol(
   //       filledBoard,
   //       castingAvailability,
@@ -39,23 +40,52 @@ public static class Loader {
   //   return fenProtocol;
   // }
 
+  public static string GetEnPassantField(string[] splitFenNotation) {
+    ArgumentException argumentException = new ArgumentException("FEN NOTATION WAS NOT CORRECT!");
+
+    if (!FenNotation.IsNotNullAndCorrectFenNotation(string.Join(FenNotation.FenSeparator, splitFenNotation)))
+      throw argumentException;
+
+    string readEnPassantString = FenNotation.GetEnPassentStringFromFenNotation(splitFenNotation);
+
+    // if (!) throw argumentException;
+
+    return readEnPassantString;
+  }
+
   public static IPiece[][] GetPieces2DArray(string[] splitFenNotation) {
+    if (!FenNotation.IsNotNullAndCorrectFenNotation(string.Join(FenNotation.FenSeparator, splitFenNotation)))
+      throw new ArgumentException("FEN NOTATION WAS NOT CORRECT!");
+
     List<IPiece> whitePieces = new();
     List<IPiece> blackPieces = new();
 
-    if (splitFenNotation != null! && StringArrayHasCorrectFenBoardNotation(splitFenNotation)) {
-      string boardString = FenNotation.GetBoardStringFromFenNotation(splitFenNotation);
-      string[] splitBoardString = boardString.Split(FenNotation.BoardSeparator);
+    string boardString = FenNotation.GetBoardStringFromFenNotation(splitFenNotation);
+    string[] splitBoardString = boardString.Split(FenNotation.BoardSeparator);
 
-      for (int row = 0; row < splitBoardString.Length; row++)
-        SetPiecesRow(whitePieces, blackPieces, row, splitBoardString);
-    }
+    for (int row = 0; row < splitBoardString.Length; row++)
+      SetPiecesRow(whitePieces, blackPieces, row, splitBoardString);
 
     return new[] { whitePieces.ToArray(), blackPieces.ToArray() };
   }
 
-  private static bool StringArrayHasCorrectFenBoardNotation(string[] stringArray)
-    => stringArray.Length > 0 && FenNotation.IsCorrectBoardNotation(stringArray[0]);
+  public static CastingAvailability GetCastingAvailability(string[] splitFenNotation) {
+    string fenString = string.Join(FenNotation.FenSeparator, splitFenNotation);
+    if (!FenNotation.IsNotNullAndCorrectFenNotation(fenString))
+      throw new ArgumentException("Incorrect splitFenNotation");
+
+    CastingAvailability castingAvailability = new();
+    string strCastingAvailability = FenNotation.GetCastingAvailabilityStringFromFenNotation(splitFenNotation);
+
+    if (FenNotation.IsCorrectCastingAvailabilityNotation(strCastingAvailability)) {
+      castingAvailability.WhiteCastableKingSide = strCastingAvailability[0] == 'K';
+      castingAvailability.WhiteCastableQueenSide = strCastingAvailability[1] == 'Q';
+      castingAvailability.BlackCastableKingSide = strCastingAvailability[2] == 'k';
+      castingAvailability.BlackCastableQueenSide = strCastingAvailability[3] == 'q';
+    }
+
+    return castingAvailability;
+  }
 
   private static void SetPiecesRow(List<IPiece> whitePieces, List<IPiece> blackPieces, int row, string[] splitBoard) {
     int pieceCol = 0;

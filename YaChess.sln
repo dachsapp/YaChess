@@ -16,6 +16,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FenNotationTester", "FenNot
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoadingTester", "LoadingTester\LoadingTester.csproj", "{5AE32EDA-575D-4EA3-A590-32A1D5173177}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChessRulesTester", "ChessRulesTester\ChessRulesTester.csproj", "{DC67523F-037E-4777-8C82-59A69397C194}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,5 +56,9 @@ Global
 		{5AE32EDA-575D-4EA3-A590-32A1D5173177}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5AE32EDA-575D-4EA3-A590-32A1D5173177}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5AE32EDA-575D-4EA3-A590-32A1D5173177}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC67523F-037E-4777-8C82-59A69397C194}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC67523F-037E-4777-8C82-59A69397C194}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC67523F-037E-4777-8C82-59A69397C194}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC67523F-037E-4777-8C82-59A69397C194}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
