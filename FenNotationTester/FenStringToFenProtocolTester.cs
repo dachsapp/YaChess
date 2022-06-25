@@ -3,7 +3,8 @@ using YaChess.Rules;
 namespace FenNotationTester;
 
 public class FenStringToFenProtocolTester {
-  [Test]
+  
+  
   [TestCase("8/8/8/8/8/8/8/8 w ---- - 50 0")]
   [TestCase("8/8/8/5P2/8/8/8/8 b K--q f3 35 110")]
   [TestCase("rkbqkbkr/pppppppp/8/8/8/8/PPPPPPPP/RKBQKBKR w KQkq - 0 0")]
@@ -12,7 +13,6 @@ public class FenStringToFenProtocolTester {
     Assert.That(actualValue, Is.True);
   }
   
-  [Test]
   [TestCase(null)]
   [TestCase("")]
   [TestCase("8/8/8/8/8/8/8/8 w ---- - 51 0")]
@@ -27,7 +27,6 @@ public class FenStringToFenProtocolTester {
     Assert.That(actualValue, Is.False);
   }
 
-  [Test]
   [TestCase("rnbqkbnr", 8)]
   [TestCase("RNBQKBNR", 8)]
   [TestCase("RNbQKbNR", 8)]
@@ -45,7 +44,6 @@ public class FenStringToFenProtocolTester {
     Assert.That(actualValue, Is.EqualTo(expectedValue));
   }
 
-  [Test]
   [TestCase("rnbqkbnr/pppppppp/8/8/8/8/pppppppp/RNBQKBNR")]
   [TestCase("rnbqkbnr/pppppppp/8/8/3P4/8/pppppppp/RNBQKBNR")]
   [TestCase("rnbqkbnB/pppppppp/8/8/3P4/8/ppQppPpp/RNBQKBNR")]
@@ -54,7 +52,6 @@ public class FenStringToFenProtocolTester {
     Assert.That(actualValue, Is.True);
   }
 
-  [Test]
   [TestCase(null)]
   [TestCase("")]
   [TestCase("rnbqkbnr/pppppppp/8/8/8/8/pppppppp")]
@@ -67,7 +64,6 @@ public class FenStringToFenProtocolTester {
     Assert.That(actualValue, Is.False);
   }
 
-  [Test]
   [TestCase("w")]
   [TestCase("b")]
   public void IsCorrectTurnNotation_CorrectIn_TrueOut(string turnString) {
@@ -75,7 +71,6 @@ public class FenStringToFenProtocolTester {
     Assert.That(actualValue, Is.True);
   }
 
-  [Test]
   [TestCase(null)]
   [TestCase("")]
   [TestCase("a")]
@@ -86,7 +81,6 @@ public class FenStringToFenProtocolTester {
     Assert.That(actualValue, Is.False);
   }
 
-  [Test]
   [TestCase("KQkq")]
   [TestCase("-Qkq")]
   [TestCase("K-kq")]
@@ -108,7 +102,6 @@ public class FenStringToFenProtocolTester {
     Assert.That(actualValue, Is.True);
   }
 
-  [Test]
   [TestCase(null)]
   [TestCase("")]
   [TestCase("KQkqK")]
@@ -123,7 +116,6 @@ public class FenStringToFenProtocolTester {
     Assert.That(actualValue, Is.False);
   }
 
-  [Test]
   [TestCase("-")]
   [TestCase("e3")]
   [TestCase("h6")]
@@ -132,7 +124,6 @@ public class FenStringToFenProtocolTester {
     Assert.That(actualValue, Is.True);
   }
   
-  [Test]
   [TestCase("")]
   [TestCase(null)]
   [TestCase("--")]
@@ -144,7 +135,6 @@ public class FenStringToFenProtocolTester {
     Assert.That(actualValue, Is.False);
   }
 
-  [Test]
   [TestCase("0")]
   [TestCase("5")]
   [TestCase("50")]
@@ -155,7 +145,6 @@ public class FenStringToFenProtocolTester {
     Assert.That(actualValue, Is.True);
   }
 
-  [Test]
   [TestCase(null)]
   [TestCase("")]
   [TestCase("-1")]
@@ -170,7 +159,6 @@ public class FenStringToFenProtocolTester {
     Assert.That(actualValue, Is.False);
   }
 
-  [Test]
   [TestCase("0")]
   [TestCase("1")]
   [TestCase("2")]
@@ -184,7 +172,6 @@ public class FenStringToFenProtocolTester {
     Assert.That(actualValue, Is.True);
   }
 
-  [Test]
   [TestCase(null)]
   [TestCase("")]
   [TestCase("-2")]

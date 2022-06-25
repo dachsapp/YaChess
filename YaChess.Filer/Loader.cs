@@ -8,49 +8,63 @@ namespace YaChess.Filer;
 public static class Loader {
   private const string FenFile = "current_profile.fen";
 
-  // public static IFenProtocol LoadCurrentFenProtocol() {
-  //   var manipulator = new FileManipulator(FenFile);
-  //   string fenNotation = manipulator.Read();
-  //
-  //   IFenProtocol fenProtocol;
-  //
-  //   if (FenNotation.IsNotNullAndCorrectFenNotation(fenNotation)) {
-  //     string[] splitFenNotation = fenNotation.Split(FenNotation.FenSeparator);
-  //
-  //     var board = new RegularBoard();
-  //
-  //     IPiece[][] pieces = GetPieces2DArray(splitFenNotation);
-  //     var filledBoard = new RegularFilledBoard(board, pieces[0], pieces[1]);
-  //
-  //     CastingAvailability castingAvailability = GetCastingAvailability(splitFenNotation);
-  //     string enPassantField = GetEnPassantField(splitFenNotation);
-  //     int halfmoveClock = GetHalfmoveClock(splitFenNotation);
-  //     int fullmoveNumber = GetFullmoveNumber(splitFenNotation);
-  //     
-  //     fenProtocol = new RegularFenProtocol(
-  //       filledBoard,
-  //       castingAvailability,
-  //       enPassantField,
-  //       halfmoveClock,
-  //       fullmoveNumber
-  //     );
-  //   }
-  //   else throw new ArgumentException($"PROVIDED FEN NOTATION INCORRECT!!\n: {fenNotation}");
-  //
-  //   return fenProtocol;
-  // }
+  public static IFenProtocol LoadCurrentFenProtocol() {
+    string fenNotation = new FileManipulator(FenFile).Read();
+    IFenProtocol fenProtocol;
 
-  public static string GetEnPassantField(string[] splitFenNotation) {
+    if (FenNotation.IsNotNullAndCorrectFenNotation(fenNotation)) {
+      string[] splitFenNotation = fenNotation.Split(FenNotation.FenSeparator);
+
+      IPiece[][] pieces = GetPieces2DArray(splitFenNotation);
+      
+      fenProtocol = new RegularFenProtocol(
+        new RegularFilledBoard(new RegularBoard(), pieces[0], pieces[1]),
+        GetCastingAvailability(splitFenNotation),
+        GetEnPassantField(splitFenNotation),
+        GetHalfmoveClock(splitFenNotation),
+        GetFullmoveNumber(splitFenNotation)
+      );
+    }
+    else throw new ArgumentException($"PROVIDED FEN NOTATION INCORRECT!!\n: {fenNotation}");
+
+    return fenProtocol;
+  }
+
+  public static int GetFullmoveNumber(string[] splitFenNotation) {
     ArgumentException argumentException = new ArgumentException("FEN NOTATION WAS NOT CORRECT!");
-
     if (!FenNotation.IsNotNullAndCorrectFenNotation(string.Join(FenNotation.FenSeparator, splitFenNotation)))
       throw argumentException;
 
-    string readEnPassantString = FenNotation.GetEnPassentStringFromFenNotation(splitFenNotation);
+    string FullmoveNumber = FenNotation.GetFullmoveNumberNotation(splitFenNotation);
 
-    // if (!) throw argumentException;
+    if (!int.TryParse(FullmoveNumber, out int fullMoveNumber)) throw argumentException;
 
-    return readEnPassantString;
+    return fullMoveNumber;
+  }
+
+  public static int GetHalfmoveClock(string[] splitFenNotation) {
+    ArgumentException argumentException = new ArgumentException("FEN NOTATION WAS NOT CORRECT!");
+    if (!FenNotation.IsNotNullAndCorrectFenNotation(string.Join(FenNotation.FenSeparator, splitFenNotation)))
+      throw argumentException;
+
+    string halfMoveString = FenNotation.GetHalfmoveClockStringFromFenNotation(splitFenNotation);
+
+    if (!int.TryParse(halfMoveString, out int halfMove)) throw argumentException;
+
+    return halfMove;
+  }
+
+  public static string GetEnPassantField(string[] splitFenNotation) {
+    string enPassantString = FenNotation.GetEnPassentStringFromFenNotation(splitFenNotation);
+
+    bool isSimpleBoardPosition = RegularChess.IsSimpleBoardPosition(enPassantString);
+    bool isEnPassantField = !(isSimpleBoardPosition && 
+                              RegularChess.PossibleEnPassantNumbers.Contains(enPassantString[1]));
+    
+    if (isEnPassantField && enPassantString != "-")
+      throw new ArgumentException("FEN NOTATION WAS NOT CORRECT!");
+
+    return enPassantString;
   }
 
   public static IPiece[][] GetPieces2DArray(string[] splitFenNotation) {

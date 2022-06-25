@@ -156,10 +156,93 @@ public class FenLoaderTests {
     => Assert.Throws<ArgumentException>(() => Loader.GetCastingAvailability(splitFenString));
 
   [TestCase("-")]
-  [TestCase("e4")]
+  [TestCase("a3")]
+  [TestCase("b3")]
+  [TestCase("c3")]
+  [TestCase("d3")]
+  [TestCase("e3")]
+  [TestCase("f3")]
+  [TestCase("g3")]
+  [TestCase("h3")]
+  [TestCase("a6")]
+  [TestCase("b6")]
+  [TestCase("c6")]
+  [TestCase("d6")]
+  [TestCase("e6")]
+  [TestCase("f6")]
+  [TestCase("g6")]
+  [TestCase("h6")]
   public void GetEnPassantField_CorrectIn_CorrectOut(string enPassantString) {
     string[] splitFenNotation = { "8/8/8/8/8/8/8/8", "w", "KQkq", enPassantString, "0", "0" };
     string actual = Loader.GetEnPassantField(splitFenNotation);
     Assert.That(actual, Is.EqualTo(enPassantString));
+  }
+  
+  [TestCase(null)]
+  [TestCase("")]
+  [TestCase("a4")]
+  [TestCase("f2")]
+  [TestCase("f")]
+  [TestCase("1")]
+  [TestCase("3f")]
+  [TestCase("alsdkfj")]
+  [TestCase("--")]
+  [TestCase("–")]
+  public void GetEnPassantField_IncorrectIn_ArgumentExceptionOut(string enPassantString) {
+    string[] splitFenNotation = { "8/8/8/8/8/8/8/8", "w", "KQkq", enPassantString, "0", "0" };
+    Assert.Throws<ArgumentException>(() => Loader.GetEnPassantField(splitFenNotation));
+  }
+
+  [TestCase("0")]
+  [TestCase("35")]
+  [TestCase("50")]
+  public void GetHalfmoveClock_CorrectIn_CorrectOut(string halfmoveString) {
+    string[] splitFenNotation = { "8/8/8/8/8/8/8/8", "w", "KQkq", "-", halfmoveString, "0" };
+
+    int actual = Loader.GetHalfmoveClock(splitFenNotation);
+    Assert.That(int.TryParse(halfmoveString, out int halfmove) && actual == halfmove);
+  }
+
+  [TestCase(null)]
+  [TestCase("")]
+  [TestCase("-")]
+  [TestCase("f")]
+  [TestCase("fa")]
+  [TestCase("-5")]
+  [TestCase("51")]
+  [TestCase("alsd")]
+  [TestCase("alsd;")]
+  [TestCase("alsdÖ")]
+  public void GetHalfmoveClock_IncorrectIn_ArgumentExceptionOut(string halfmoveString) {
+    string[] splitFenNotation = { "8/8/8/8/8/8/8/8", "w", "KQkq", "-", halfmoveString, "0" };
+    Assert.Throws<ArgumentException>(() => Loader.GetHalfmoveClock(splitFenNotation));
+  }
+
+  [TestCase("0")]
+  [TestCase("35")]
+  [TestCase("50")]
+  [TestCase("100")]
+  [TestCase("930532")]
+  [TestCase("2147483647")] // maximum int value
+  public void GetFullmoveNumber_CorrectIn_CorrectOut(string fullmoveString) {
+    string[] splitFenNotation = { "8/8/8/8/8/8/8/8", "w", "KQkq", "-", "0", fullmoveString };
+
+    int actual = Loader.GetFullmoveNumber(splitFenNotation);
+    Assert.That(int.TryParse(fullmoveString, out int fullmoveNumber) && actual == fullmoveNumber);
+  }
+
+  [TestCase(null)]
+  [TestCase("")]
+  [TestCase("-5")]
+  [TestCase("3d5")]
+  [TestCase("afs")]
+  [TestCase(";")]
+  [TestCase("-")]
+  [TestCase("229309000000")]
+  [TestCase("2293fj")]
+  [TestCase("2293fj")]
+  public void GetFullmoveNumber_IncorrectIn_ArgumentExceptionOut(string fullmoveString) {
+    string[] splitFenNotation = { "8/8/8/8/8/8/8/8", "w", "KQkq", "-", "0", fullmoveString };
+    Assert.Throws<ArgumentException>(() => Loader.GetFullmoveNumber(splitFenNotation));
   }
 }
